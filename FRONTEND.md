@@ -1,6 +1,6 @@
 # EduPedu API Documentation
 
-> **Base URL:** `http://localhost:8080`
+> **Base URL:** `http://136.116.64.6:8080`
 > **API Prefix:** `/api/v1`
 > **Content-Type:** `application/json`
 > **Authentication:** Bearer JWT Token (RSA256 signed)
@@ -677,7 +677,7 @@ POST /api/v1/admin/registerNewUser
 }
 ```
 
-> **WebSocket:** `ws://localhost:8080/ws-chat`
+> **WebSocket:** `ws://136.116.64.6:8080/ws-chat`
 
 ---
 

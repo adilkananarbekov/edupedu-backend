@@ -1,0 +1,82 @@
+stages:
+  - verify
+  - deploy
+
+default:
+  interruptible: true
+
+verify_backend:
+  stage: verify
+  image: eclipse-temurin:21-jdk
+  script:
+    - chmod +x gradlew
+    - ./gradlew clean bootJar --no-daemon
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH'
+
+deploy_production:
+  stage: deploy
+  image: alpine:3.20
+  needs:
+    - verify_backend
+  before_script:
+    - apk add --no-cache openssh-client rsync
+    - test -n "${GCP_VM_HOST:-}" || (echo "GCP_VM_HOST is required" && exit 1)
+    - test -n "${GCP_VM_USER:-}" || (echo "GCP_VM_USER is required" && exit 1)
+    - test -n "${GCP_VM_SSH_KEY:-}" || (echo "GCP_VM_SSH_KEY is required" && exit 1)
+    - test -n "${PROD_ENV_FILE:-}" || (echo "PROD_ENV_FILE is required" && exit 1)
+    - mkdir -p ~/.ssh
+    - |
+      if [ -f "$GCP_VM_SSH_KEY" ]; then
+        cp "$GCP_VM_SSH_KEY" ~/.ssh/id_ed25519
+      else
+        printf '%s\n' "$GCP_VM_SSH_KEY" > ~/.ssh/id_ed25519
+      fi
+    - chmod 600 ~/.ssh/id_ed25519
+    - export GCP_VM_PORT="${GCP_VM_PORT:-22}"
+    - |
+      cat > ~/.ssh/config <<EOF
+      Host gcp-vm
+        HostName ${GCP_VM_HOST}
+        User ${GCP_VM_USER}
+        Port ${GCP_VM_PORT}
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null
+        IdentityFile ~/.ssh/id_ed25519
+      EOF
+  script:
+    - export GCP_APP_DIR="${GCP_APP_DIR:-/opt/edupedu-backend}"
+    - ssh gcp-vm "mkdir -p ${GCP_APP_DIR}/secrets"
+    - rsync -az --delete --exclude '.git/' --exclude '.gradle/' --exclude 'build/' --exclude '.env' --exclude '.env.prod' --exclude 'secrets/' ./ "gcp-vm:${GCP_APP_DIR}/"
+    - |
+      if [ -f "$PROD_ENV_FILE" ]; then
+        scp "$PROD_ENV_FILE" "gcp-vm:${GCP_APP_DIR}/.env.prod"
+      else
+        printf '%s\n' "$PROD_ENV_FILE" | ssh gcp-vm "cat > ${GCP_APP_DIR}/.env.prod"
+      fi
+    - |
+      if [ -n "${JWT_PRIVATE_KEY_FILE:-}" ]; then
+        if [ -f "$JWT_PRIVATE_KEY_FILE" ]; then
+          scp "$JWT_PRIVATE_KEY_FILE" "gcp-vm:${GCP_APP_DIR}/secrets/jwt_private_key.pem"
+        else
+          printf '%s\n' "$JWT_PRIVATE_KEY_FILE" | ssh gcp-vm "cat > ${GCP_APP_DIR}/secrets/jwt_private_key.pem"
+        fi
+      fi
+    - |
+      if [ -n "${JWT_PUBLIC_KEY_FILE:-}" ]; then
+        if [ -f "$JWT_PUBLIC_KEY_FILE" ]; then
+          scp "$JWT_PUBLIC_KEY_FILE" "gcp-vm:${GCP_APP_DIR}/secrets/jwt_public_key.pem"
+        else
+          printf '%s\n' "$JWT_PUBLIC_KEY_FILE" | ssh gcp-vm "cat > ${GCP_APP_DIR}/secrets/jwt_public_key.pem"
+        fi
+      fi
+    - ssh gcp-vm "chmod 600 ${GCP_APP_DIR}/secrets/*.pem || true"
+    - ssh gcp-vm "cd ${GCP_APP_DIR} && docker compose --env-file .env.prod up -d --build --remove-orphans"
+    - ssh gcp-vm "cd ${GCP_APP_DIR} && docker compose ps"
+  environment:
+    name: production
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "backend"'
+      when: manual
+    - when: never

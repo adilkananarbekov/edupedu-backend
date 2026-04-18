@@ -1,6 +1,9 @@
 package com.edupedu.app.security;
 
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -13,9 +16,9 @@ public class KeyUtils {
     private KeyUtils() {}
 
     public static PrivateKey loadPrivateKey(final String pemPath) throws Exception {
-        final String key = readKeyFromResource(pemPath).replace("-----BEGIN PRIVATE KEY-----", "")
-                                                       .replace("-----END PRIVATE KEY-----", "")
-                                                       .replaceAll("\\s", "");
+        final String key = readKey(pemPath).replace("-----BEGIN PRIVATE KEY-----", "")
+                                           .replace("-----END PRIVATE KEY-----", "")
+                                           .replaceAll("\\s", "");
 
         final byte[] decoded = Base64.getDecoder().decode(key);
         final PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decoded);
@@ -23,17 +26,26 @@ public class KeyUtils {
     }
 
     public static PublicKey loadPublicKey(final String pemPath) throws Exception {
-        final String key = readKeyFromResource(pemPath).replace("-----BEGIN PUBLIC KEY-----", "")
-                                                       .replace("-----END PUBLIC KEY-----", "")
-                                                       .replaceAll("\\s", "");
+        final String key = readKey(pemPath).replace("-----BEGIN PUBLIC KEY-----", "")
+                                           .replace("-----END PUBLIC KEY-----", "")
+                                           .replaceAll("\\s", "");
 
         final byte[] decoded = Base64.getDecoder().decode(key);
         final X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
         return KeyFactory.getInstance("RSA").generatePublic(keySpec);
     }
 
-    private static String readKeyFromResource(final String path) throws Exception {
-        try (final InputStream is = KeyUtils.class.getClassLoader().getResourceAsStream(path)) {
+    private static String readKey(final String path) throws Exception {
+        final String normalizedPath = path.startsWith("classpath:")
+                ? path.substring("classpath:".length())
+                : path;
+
+        final Path filesystemPath = Paths.get(normalizedPath);
+        if (Files.exists(filesystemPath)) {
+            return Files.readString(filesystemPath);
+        }
+
+        try (final InputStream is = KeyUtils.class.getClassLoader().getResourceAsStream(normalizedPath)) {
             if (is == null) {
                 throw new IllegalArgumentException("Key not found: " + path);
             }

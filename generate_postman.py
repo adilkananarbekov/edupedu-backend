@@ -140,11 +140,11 @@ def generate_postman_collection(openapi_path, output_path):
 def generate_postman_environment(output_path):
     env = {
         "id": str(uuid.uuid4()),
-        "name": "EduPedu Local",
+        "name": "EduPedu Server",
         "values": [
             {
                 "key": "baseUrl",
-                "value": "http://127.0.0.1:8080",
+                "value": "http://136.116.64.6:8080",
                 "enabled": True
             },
             {

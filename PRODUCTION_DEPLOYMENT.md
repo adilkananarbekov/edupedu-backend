@@ -37,15 +37,16 @@ The local stack runs with:
 
 - `SPRING_PROFILES_ACTIVE=local`
 - seeded demo users
-- localhost CORS
+- server CORS (`136.116.64.6`)
 - local JWT key paths
 
 ## Production Environment
 
 1. Copy `.env.prod.example` to a real production env file outside git
 2. Replace placeholder values with real GCP / GitLab values
-3. Mount or provide your real JWT key files
+3. Put real JWT key files into `./secrets` on the server (mapped to `/run/secrets`)
 4. Run the backend with `SPRING_PROFILES_ACTIVE=prod`
+5. Use `docker compose --env-file .env.prod up -d --build`
 
 ## Notes
 
