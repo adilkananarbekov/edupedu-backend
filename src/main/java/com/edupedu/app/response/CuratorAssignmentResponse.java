@@ -15,6 +15,12 @@ public record CuratorAssignmentResponse(
         @JsonProperty("teacher_full_name")
         String teacherFullName,
 
+        @JsonProperty("teacher_email")
+        String teacherEmail,
+
+        @JsonProperty("teacher_phone")
+        String teacherPhone,
+
         @JsonProperty("student_group_id")
         Long studentGroupId,
 

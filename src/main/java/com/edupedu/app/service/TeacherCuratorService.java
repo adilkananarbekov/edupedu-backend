@@ -23,6 +23,7 @@ import com.edupedu.app.repository.TeacherRepository;
 import com.edupedu.app.response.CuratorAssignmentResponse;
 import com.edupedu.app.response.CuratorDashboardResponse;
 import com.edupedu.app.response.CuratorRiskStudentResponse;
+import com.edupedu.app.response.CuratorStudentOverviewResponse;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -176,6 +177,45 @@ public class TeacherCuratorService {
 	);
     }
 
+    @Transactional(readOnly = true)
+    public List<CuratorStudentOverviewResponse> getStudentsOverviewForCurrentTeacher(String teacherEmail) {
+	Teacher teacher = teacherRepository.findByUserEmail(teacherEmail)
+		.orElseThrow(() -> new ResourceNotFoundException("Teacher", "email", teacherEmail));
+
+	Curator curator = curatorRepository.findByTeacherId(teacher.getId())
+		.orElseThrow(() -> new ResourceNotFoundException("Curator", "teacherId", teacher.getId()));
+
+	StudentGroup studentGroup = curator.getStudentGroup();
+	if (studentGroup == null) {
+	    throw new IllegalArgumentException("Curator is not assigned to any student group");
+	}
+
+	return studentRepository.findByStudentGroupId(studentGroup.getId()).stream()
+		.map(student -> {
+		    long absences = defaultCount(
+			    attendanceRepository.countByStudentAndStatus(student.getId(), AttendanceStatus.ABSENT));
+
+		    List<Grade> studentGrades = gradeRepository.findByStudentId(student.getId());
+		    Double averageGrade = studentGrades.isEmpty()
+			    ? null
+			    : round(studentGrades.stream().mapToDouble(Grade::getValue).average().orElse(0.0));
+
+		    boolean atRisk = absences >= 3 || (averageGrade != null && averageGrade < 60.0);
+
+		    return new CuratorStudentOverviewResponse(
+			    student.getId(),
+			    student.getUser() != null ? student.getUser().getId() : null,
+			    student.getUser() != null ? student.getUser().getFullName() : "Unknown",
+			    student.getParentPhone(),
+			    averageGrade,
+			    absences,
+			    atRisk
+		    );
+		})
+		.sorted((a, b) -> a.fullName().compareToIgnoreCase(b.fullName()))
+		.toList();
+    }
+
     private CuratorAssignmentResponse mapAssignment(Curator curator) {
 	StudentGroup group = curator.getStudentGroup();
 	Teacher teacher = curator.getTeacher();
@@ -185,6 +225,8 @@ public class TeacherCuratorService {
 		teacher != null ? teacher.getId() : null,
 		teacher != null && teacher.getUser() != null ? teacher.getUser().getId() : null,
 		teacher != null && teacher.getUser() != null ? teacher.getUser().getFullName() : null,
+		teacher != null && teacher.getUser() != null ? teacher.getUser().getEmail() : null,
+		teacher != null && teacher.getUser() != null ? teacher.getUser().getPhone() : null,
 		group != null ? group.getId() : null,
 		group != null ? group.getName() : null
 	);

@@ -34,7 +34,10 @@ docker compose --env-file .env.prod up -d --build
 - `GET /api/v1/admin/curators/student-group/{studentGroupId}` - get curator assignment by group
 - `GET /api/v1/admin/curators` - list all curator assignments
 - `GET /api/v1/teacher/curators/dashboard/me` - get dashboard for currently authenticated teacher curator
+- `GET /api/v1/teacher/curators/students/me` - get full list of current curator's students with risk flag
 - `GET /api/v1/student/curators/me` - get current student's curator assignment
+
+Curator assignment response includes contact fields: `teacher_email`, `teacher_phone`.
 
 Example assign payload:
 ```json

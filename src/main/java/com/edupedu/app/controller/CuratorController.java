@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.edupedu.app.request.AssignCuratorRequest;
 import com.edupedu.app.response.CuratorAssignmentResponse;
 import com.edupedu.app.response.CuratorDashboardResponse;
+import com.edupedu.app.response.CuratorStudentOverviewResponse;
 import com.edupedu.app.service.TeacherCuratorService;
 
 import jakarta.validation.Valid;
@@ -58,6 +59,14 @@ public class CuratorController {
     public ResponseEntity<CuratorDashboardResponse> getMyCuratorDashboard(Authentication authentication) {
         return new ResponseEntity<>(
                 teacherCuratorService.getDashboardForCurrentTeacher(authentication.getName()),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/teacher/curators/students/me")
+    public ResponseEntity<java.util.List<CuratorStudentOverviewResponse>> getMyCuratorStudents(Authentication authentication) {
+        return new ResponseEntity<>(
+                teacherCuratorService.getStudentsOverviewForCurrentTeacher(authentication.getName()),
                 HttpStatus.OK
         );
     }
