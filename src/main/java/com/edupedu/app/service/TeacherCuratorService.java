@@ -87,6 +87,28 @@ public class TeacherCuratorService {
     }
 
     @Transactional(readOnly = true)
+    public List<CuratorAssignmentResponse> getAllAssignments() {
+	return curatorRepository.findAll().stream()
+		.map(this::mapAssignment)
+		.toList();
+    }
+
+    @Transactional(readOnly = true)
+    public CuratorAssignmentResponse getForCurrentStudent(String studentEmail) {
+	Student student = studentRepository.findByUserEmail(studentEmail)
+		.orElseThrow(() -> new ResourceNotFoundException("Student", "email", studentEmail));
+
+	if (student.getStudentGroup() == null) {
+	    throw new IllegalArgumentException("Student is not assigned to any group");
+	}
+
+	Curator curator = curatorRepository.findByStudentGroupId(student.getStudentGroup().getId())
+		.orElseThrow(() -> new ResourceNotFoundException("Curator", "studentGroupId", student.getStudentGroup().getId()));
+
+	return mapAssignment(curator);
+    }
+
+    @Transactional(readOnly = true)
     public CuratorDashboardResponse getDashboardForCurrentTeacher(String teacherEmail) {
 	Teacher teacher = teacherRepository.findByUserEmail(teacherEmail)
 		.orElseThrow(() -> new ResourceNotFoundException("Teacher", "email", teacherEmail));

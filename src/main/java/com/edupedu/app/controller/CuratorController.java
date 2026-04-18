@@ -49,10 +49,23 @@ public class CuratorController {
         return new ResponseEntity<>(teacherCuratorService.getByStudentGroupId(studentGroupId), HttpStatus.OK);
     }
 
+    @GetMapping("/admin/curators")
+    public ResponseEntity<java.util.List<CuratorAssignmentResponse>> getAllCurators() {
+        return new ResponseEntity<>(teacherCuratorService.getAllAssignments(), HttpStatus.OK);
+    }
+
     @GetMapping("/teacher/curators/dashboard/me")
     public ResponseEntity<CuratorDashboardResponse> getMyCuratorDashboard(Authentication authentication) {
         return new ResponseEntity<>(
                 teacherCuratorService.getDashboardForCurrentTeacher(authentication.getName()),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/student/curators/me")
+    public ResponseEntity<CuratorAssignmentResponse> getMyCurator(Authentication authentication) {
+        return new ResponseEntity<>(
+                teacherCuratorService.getForCurrentStudent(authentication.getName()),
                 HttpStatus.OK
         );
     }

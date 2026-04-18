@@ -32,7 +32,9 @@ docker compose --env-file .env.prod up -d --build
 - `DELETE /api/v1/admin/curators/teacher/{teacherId}` - unassign curator from any group
 - `GET /api/v1/admin/curators/teacher/{teacherId}` - get curator assignment by teacher
 - `GET /api/v1/admin/curators/student-group/{studentGroupId}` - get curator assignment by group
+- `GET /api/v1/admin/curators` - list all curator assignments
 - `GET /api/v1/teacher/curators/dashboard/me` - get dashboard for currently authenticated teacher curator
+- `GET /api/v1/student/curators/me` - get current student's curator assignment
 
 Example assign payload:
 ```json

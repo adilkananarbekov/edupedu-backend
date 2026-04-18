@@ -19,6 +19,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     boolean existsByStudentGroupId(Long studentGroupId);
     
     Optional<Student> findByUserId(Long userId);
+    Optional<Student> findByUserEmail(String email);
+
     boolean existsByUserId(Long userId);
 
     @Query("SELECT s FROM Student s WHERE s.studentGroup.faculty.university.id = :universityId")
