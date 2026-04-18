@@ -27,9 +27,12 @@ public class JwtService {
     @Value("${app.security.jwt.refresh-token-expiration}")
     private long refreshTokenExpiration;
 
-    public JwtService() throws Exception {
-        this.privateKey = KeyUtils.loadPrivateKey("keys/local-only/private_key.pem");
-        this.publicKey = KeyUtils.loadPublicKey("keys/local-only/public_key.pem");
+    public JwtService(
+            @Value("${app.security.jwt.private-key-path}") final String privateKeyPath,
+            @Value("${app.security.jwt.public-key-path}") final String publicKeyPath
+    ) throws Exception {
+        this.privateKey = KeyUtils.loadPrivateKey(privateKeyPath);
+        this.publicKey = KeyUtils.loadPublicKey(publicKeyPath);
     }
 
     public String generateAccessToken(final String username) {

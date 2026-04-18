@@ -1,7 +1,7 @@
 package com.edupedu.app.model.enums;
 
 public enum Role {
-    ROLE_ADMIN("ROLE_SUPER_ADMIN"),
+    ROLE_ADMIN("ROLE_ADMIN"),
     ROLE_UNIVERSITY_ADMIN("ROLE_UNIVERSITY_ADMIN"),
     ROLE_STUDENT("ROLE_STUDENT"),
     ROLE_TEACHER("ROLE_TEACHER"),

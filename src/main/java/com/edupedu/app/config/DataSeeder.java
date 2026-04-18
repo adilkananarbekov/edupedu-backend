@@ -20,7 +20,7 @@ import java.util.Set;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-@Profile("!test")
+@Profile("local")
 public class DataSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
@@ -42,11 +42,10 @@ public class DataSeeder implements CommandLineRunner {
     @Transactional
     public void run(String... args) {
 
-        // Check if database is already seeded
-        // if (universityRepository.count() > 0) {
-        //     log.info("Database already seeded. Skipping seeder.");
-        //     return;
-        // }
+        if (userRepository.count() > 0 || universityRepository.count() > 0) {
+            log.info("Database already seeded. Skipping seeder.");
+            return;
+        }
 
         log.info("Starting database seeding...");
 

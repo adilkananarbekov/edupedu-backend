@@ -1,0 +1,12 @@
+.git
+.github
+.gradle
+build
+bin
+out
+.idea
+.vscode
+.env
+.env.*
+*.log
+*.tmp
