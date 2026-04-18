@@ -32,6 +32,7 @@ public class DataSeeder implements CommandLineRunner {
     private final FacultyRepository facultyRepository;
     private final CourseRepository courseRepository;
     private final ModuleRepository moduleRepository;
+        private final CuratorRepository curatorRepository;
     private final CourseLessonRepository courseLessonRepository;
     private final CourseTestRepository courseTestRepository;
     private final CourseTestQuestionRepository courseTestQuestionRepository;
@@ -168,6 +169,13 @@ public class DataSeeder implements CommandLineRunner {
                         .user(teacherUser1)
                         .subjects(teacherSubjects1)
                         .employeeNumber("T002")
+                        .build()
+        );
+
+        curatorRepository.save(
+                Curator.builder()
+                        .teacher(johnTeacher)
+                        .studentGroup(group10A)
                         .build()
         );
 

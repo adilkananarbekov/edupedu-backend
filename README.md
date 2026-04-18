@@ -26,3 +26,18 @@ docker compose up --build
 ```bash
 docker compose --env-file .env.prod up -d --build
 ```
+
+## Curator MVP APIs
+- `POST /api/v1/admin/curators/assign` - assign a teacher as curator for a student group
+- `DELETE /api/v1/admin/curators/teacher/{teacherId}` - unassign curator from any group
+- `GET /api/v1/admin/curators/teacher/{teacherId}` - get curator assignment by teacher
+- `GET /api/v1/admin/curators/student-group/{studentGroupId}` - get curator assignment by group
+- `GET /api/v1/teacher/curators/dashboard/me` - get dashboard for currently authenticated teacher curator
+
+Example assign payload:
+```json
+{
+	"teacherId": 1,
+	"studentGroupId": 2
+}
+```

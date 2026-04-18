@@ -55,7 +55,7 @@ public class AuthService {
 
     public AdminRegistrationResponse<User, ?> adminRegistration(AdminRegistrationRequest request) {
         if(userRepository.findByEmail(request.email()).isPresent()) {
-            throw new RuntimeException("User with email " + request.email() + " already exists");
+            throw new IllegalArgumentException("User with email " + request.email() + " already exists");
         }
 
         if (request.role() == Role.ROLE_STUDENT) {
@@ -79,7 +79,7 @@ public class AuthService {
 
     public AdminRegistrationResponse<User, ?> register(RegistrationRequest request) {
         if (userRepository.findByEmail(request.email()).isPresent()) {
-            throw new RuntimeException("User with email " + request.email() + " already exists");
+            throw new IllegalArgumentException("User with email " + request.email() + " already exists");
         }
 
         User user = User.builder()

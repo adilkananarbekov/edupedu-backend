@@ -14,6 +14,8 @@ import com.edupedu.app.model.User;
 @Repository
 public interface TeacherRepository  extends JpaRepository<Teacher, Long>{
     Optional<Teacher> findByUserId(Long userId);
+    Optional<Teacher> findByUserEmail(String email);
+
     @Query("SELECT t FROM Teacher t WHERE t.user.university.id = :universityId")
     List<Teacher> findAllByUniversityId(@Param("universityId") Long universityId);
 }   
