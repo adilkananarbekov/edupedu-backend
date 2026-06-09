@@ -9,6 +9,7 @@ import com.edupedu.app.exception.ResourceNotFoundException;
 import com.edupedu.app.model.StudentGroup;
 
 import com.edupedu.app.repository.StudentGroupRepository;
+import com.edupedu.app.response.StudentGroupResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,23 +20,26 @@ public class StudentGroupService {
     private final StudentGroupRepository studentGroupRepository;
 
     @Transactional(readOnly = true)
-    public List<StudentGroup> getAllStudentGroups() {
-        return studentGroupRepository.findAll();
+    public List<StudentGroupResponse> getAllStudentGroups() {
+        return studentGroupRepository.findAll().stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     @Transactional(readOnly = true)
-    public StudentGroup getStudentGroupById(Long id) {
+    public StudentGroupResponse getStudentGroupById(Long id) {
         return studentGroupRepository.findById(id)
+                .map(this::mapToResponse)
                 .orElseThrow(() -> new ResourceNotFoundException("StudentGroup", "id", id));
     }
 
     @Transactional
-    public StudentGroup createStudentGroup(StudentGroup studentGroup) {
-        return studentGroupRepository.save(studentGroup);
+    public StudentGroupResponse createStudentGroup(StudentGroup studentGroup) {
+        return mapToResponse(studentGroupRepository.save(studentGroup));
     }
 
     @Transactional
-    public StudentGroup updateStudentGroup(Long id, StudentGroup updatedStudentGroup) {
+    public StudentGroupResponse updateStudentGroup(Long id, StudentGroup updatedStudentGroup) {
         StudentGroup existingStudentGroup = studentGroupRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("StudentGroup", "id", id));
 
@@ -44,7 +48,7 @@ public class StudentGroupService {
         existingStudentGroup.setFaculty(updatedStudentGroup.getFaculty());
         existingStudentGroup.setUniversity(updatedStudentGroup.getUniversity());
 
-        return studentGroupRepository.save(existingStudentGroup);
+        return mapToResponse(studentGroupRepository.save(existingStudentGroup));
     }
 
     @Transactional
@@ -52,5 +56,18 @@ public class StudentGroupService {
         StudentGroup studentGroup = studentGroupRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("StudentGroup", "id", id));
         studentGroupRepository.delete(studentGroup);
+    }
+
+    private StudentGroupResponse mapToResponse(StudentGroup studentGroup) {
+        var faculty = studentGroup.getFaculty();
+        var students = studentGroup.getStudents();
+
+        return new StudentGroupResponse(
+                studentGroup.getId(),
+                studentGroup.getName(),
+                studentGroup.getYear(),
+                faculty != null ? faculty.getMonthlyFee() : null,
+                students != null ? students.size() : 0
+        );
     }
 }

@@ -1,7 +1,7 @@
 app:
-  url: ${APP_URL}
+  url: ${APP_URL:http://136.116.64.6}
   cors:
-    allowed-origin-patterns: ${CORS_ALLOWED_ORIGIN_PATTERNS}
+    allowed-origin-patterns: ${CORS_ALLOWED_ORIGIN_PATTERNS:http://136.116.64.6,https://136.116.64.6}
   security:
     jwt:
       private-key-path: ${JWT_PRIVATE_KEY_PATH}

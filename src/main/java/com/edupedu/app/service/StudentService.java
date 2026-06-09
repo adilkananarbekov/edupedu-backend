@@ -125,6 +125,8 @@ public class StudentService {
     }
 
     private StudentResponse mapToResponse(Student student) {
+        var studentGroup = student.getStudentGroup();
+
         return new StudentResponse(
                 student.getId(),
                 student.getUser().getId(),
@@ -135,7 +137,15 @@ public class StudentService {
                 student.getStudentNumber(),
                 student.getAccountNumber(),
                 student.getParentPhone(),
-                student.getStudentGroup() != null ? student.getStudentGroup().getId() : null
+                studentGroup != null ? studentGroup.getId() : null,
+                studentGroup != null ? studentGroup.getName() : null,
+                student.getUser().getUniversity() != null ? student.getUser().getUniversity().getId() : null,
+                student.getUser().isEmailVerified(),
+                student.getUser().isEnabled(),
+                student.getUser().isLocked(),
+                student.getUser().isExpired(),
+                student.getUser().getCreatedAt(),
+                student.getUser().getLastModifiedAt()
         );
     }
 

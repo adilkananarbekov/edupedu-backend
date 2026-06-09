@@ -31,6 +31,7 @@ public class AnnouncementService {
     private final StudentGroupRepository studentGroupRepository;
     private final StudentRepository studentRepository;
 
+    @Transactional(readOnly = true)
     public List<AnnouncementDTO> getAnnouncementsForStudent(Long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student", "id", studentId));
@@ -44,6 +45,7 @@ public class AnnouncementService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<AnnouncementDTO> getAnnouncementsForTeacher() {
         return announcementRepository.findActiveAnnouncementsForRole(Role.ROLE_TEACHER, LocalDateTime.now())
                 .stream()
@@ -51,6 +53,7 @@ public class AnnouncementService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<AnnouncementDTO> getAllAnnouncements() {
         return announcementRepository.findAllOrderByImportanceAndDate()
                 .stream()

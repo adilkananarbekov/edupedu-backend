@@ -39,6 +39,7 @@ public class AttendanceService {
     private final ScheduleRepository scheduleRepository;
     private final UserRepository userRepository;
 
+    @Transactional(readOnly = true)
     public List<AttendanceDTO> getStudentAttendance(Long studentId) {
         return attendanceRepository.findByStudentId(studentId)
                 .stream()
@@ -46,6 +47,7 @@ public class AttendanceService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<AttendanceDTO> getAllAttendance() {
         return attendanceRepository.findAll()
                 .stream()
@@ -53,6 +55,7 @@ public class AttendanceService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<AttendanceDTO> getStudentAttendanceByDateRange(Long studentId, LocalDate startDate, LocalDate endDate) {
         return attendanceRepository.findByStudentAndDateRange(studentId, startDate, endDate)
                 .stream()
@@ -60,6 +63,7 @@ public class AttendanceService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<AttendanceDTO> getAttendanceByDateRange(LocalDate startDate, LocalDate endDate) {
         return attendanceRepository.findAll()
                 .stream()
@@ -68,6 +72,7 @@ public class AttendanceService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public Map<String, Long> getStudentAttendanceStats(Long studentId) {
         Map<String, Long> stats = new HashMap<>();
         stats.put("present", attendanceRepository.countByStudentAndStatus(studentId, AttendanceStatus.PRESENT));
@@ -77,6 +82,7 @@ public class AttendanceService {
         return stats;
     }
 
+    @Transactional(readOnly = true)
     public Map<String, Long> getAttendanceStats() {
         Map<String, Long> stats = new HashMap<>();
         List<Attendance> records = attendanceRepository.findAll();
@@ -129,6 +135,7 @@ public class AttendanceService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<AttendanceDTO> getScheduleAttendance(Long scheduleId, LocalDate date) {
         return attendanceRepository.findByScheduleId(scheduleId)
                 .stream()

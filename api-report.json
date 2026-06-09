@@ -1,0 +1,914 @@
+{
+  "base_url": "http://136.116.64.6",
+  "origin": "http://localhost:57323",
+  "generated_at_epoch": 1776669714,
+  "openapi": {
+    "status": 200,
+    "reason": "",
+    "duration_ms": 902.5,
+    "body_preview": "{\"openapi\":\"3.1.0\",\"info\":{\"title\":\"OpenAPI definition\",\"version\":\"v0\"},\"servers\":[{\"url\":\"http://136.116.64.6\",\"description\":\"Generated server url\"}],\"paths\":{\"/api/v1/universities/{id}\":{\"get\":{\"tags\":[\"university-c..."
+  },
+  "preflight": {
+    "status": 204,
+    "reason": "No Content",
+    "duration_ms": 493.4,
+    "allow_origin": "http://localhost:57323",
+    "allow_methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  },
+  "login": {
+    "status": null,
+    "reason": "TimeoutError",
+    "duration_ms": 5275.5,
+    "diagnosis": "Network or timeout failure while trying to log in.",
+    "body_preview": "timed out",
+    "has_token": false
+  },
+  "checks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/announcements",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/announcements/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 478.8,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/bulk-assign",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/email/{email}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 504.1,
+      "note": "used sample id=1 for email"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/faculties",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/faculties/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 505.3,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/faculties/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/registerNewUser",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/schedule",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/schedule/generate",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/schedule/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 492.6,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/student-groups",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/student-groups/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 499.7,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/student-groups/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/students",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 496.4,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/students",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/students/assign/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/students/unassigned",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 505.5,
+      "note": ""
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/students/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 489.7,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/students/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/students/{studentId}/group",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/subjects",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 506.9,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/subjects",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/subjects/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 498.8,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/subjects/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 508.1,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/subjects/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/teachers",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/teachers/getWorkload",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 493.0,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/teachers/user/{userId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 494.9,
+      "note": "used sample id=1 for userId"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/teachers/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 504.9,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/teachers/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 492.8,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/teachers/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/university",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 501.4,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/users",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 503.6,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/users",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 495.0,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 504.3,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/announcements",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 499.9,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/announcements/all",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 492.9,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/attendance",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 502.9,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/attendance/range",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 498.9,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/attendance/reports/attendance",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 500.7,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/attendance/stats",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 499.3,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/attendance/student/{studentId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 502.2,
+      "note": "used sample id=1 for studentId"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/forgot-password",
+      "status": null,
+      "reason": "TimeoutError",
+      "classification": "network_error",
+      "duration_ms": 5247.8,
+      "note": "timed out"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 508.6,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": null,
+      "reason": "TimeoutError",
+      "classification": "network_error",
+      "duration_ms": 5256.7,
+      "note": "timed out"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "status": null,
+      "reason": "TimeoutError",
+      "classification": "network_error",
+      "duration_ms": 5231.9,
+      "note": "timed out"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/reset-password",
+      "status": null,
+      "reason": "TimeoutError",
+      "classification": "network_error",
+      "duration_ms": 5246.0,
+      "note": "timed out"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/courses/catalog",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 505.8,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/enrollments",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/enrollments/my",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 509.0,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/faculties",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 487.1,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/faculties/university",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 499.8,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/faculties/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 506.7,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/grades",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 1499.5,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/grades/averages",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 1495.4,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/grades/subject/{subjectId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 499.5,
+      "note": "used sample id=1 for subjectId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/messages",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 506.2,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/messages",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/messages/conversations",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 494.7,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/messages/conversations/{otherUserId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 519.3,
+      "note": "used sample id=1 for otherUserId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/progress/courses/{courseId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 477.3,
+      "note": "used sample id=1 for courseId"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/progress/lessons/{lessonId}/complete",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 497.1,
+      "note": "used sample id=1 for lessonId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/schedule/class/{classGroupId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 514.6,
+      "note": "used sample id=1 for classGroupId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/schedule/teacher/{teacherId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 489.0,
+      "note": "used sample id=1 for teacherId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/schedule/week",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 500.6,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/student-groups",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 499.5,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/student-groups/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 493.7,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/students/group/{groupId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 1502.5,
+      "note": "used sample id=1 for groupId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/students/user/{userId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 1500.8,
+      "note": "used sample id=1 for userId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/students/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 499.2,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/teacher/attendance",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/teacher/attendance/schedule/{scheduleId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 1500.2,
+      "note": "used sample id=1 for scheduleId"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/teacher/courses",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/teacher/courses/my",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 510.2,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/teacher/courses/{courseId}/modules",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/teacher/courses/{courseId}/modules/{moduleId}/lessons",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/teacher/courses/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 501.4,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/teacher/courses/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 489.8,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/teacher/courses/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/teacher/enrollments/course/{courseId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 1494.9,
+      "note": "used sample id=1 for courseId"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/teacher/grades",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/teacher/grades/student/{studentId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 497.4,
+      "note": "used sample id=1 for studentId"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/teacher/grades/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 503.4,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/teacher/progress/courses/{courseId}/students",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 503.1,
+      "note": "used sample id=1 for courseId"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/teacher/teachers/{teacherId}/subjects",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/teacher/tests",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/teacher/tests/{testId}/questions",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/teachers",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 500.2,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/tests/attempts/{attemptId}/submit",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tests/{testId}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 497.2,
+      "note": "used sample id=1 for testId"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/tests/{testId}/attempts",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 496.2,
+      "note": "used sample id=1 for testId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tests/{testId}/questions",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 498.9,
+      "note": "used sample id=1 for testId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/universities",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 506.5,
+      "note": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/universities",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/universities/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 497.9,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/universities/{id}",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 504.6,
+      "note": "used sample id=1 for id"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/universities/{id}",
+      "status": null,
+      "reason": "",
+      "classification": "skipped",
+      "note": "request body example not configured"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/university/students",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 1001.8,
+      "note": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/university/{universityId}/subjects",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 488.0,
+      "note": "used sample id=1 for universityId"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/university/{universityId}/teachers",
+      "status": 403,
+      "reason": "",
+      "classification": "auth_blocked",
+      "duration_ms": 508.3,
+      "note": "used sample id=1 for universityId"
+    }
+  ]
+}

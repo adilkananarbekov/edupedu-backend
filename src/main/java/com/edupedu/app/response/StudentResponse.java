@@ -2,6 +2,8 @@ package com.edupedu.app.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDateTime;
+
 public record StudentResponse(
         @JsonProperty("id")
         Long id,
@@ -31,6 +33,30 @@ public record StudentResponse(
         String parentPhone,
 
         @JsonProperty("student_group_id")
-        Long studentGroupId
+        Long studentGroupId,
+
+        @JsonProperty("student_group_name")
+        String studentGroupName,
+
+        @JsonProperty("university_id")
+        Long universityId,
+
+        @JsonProperty("email_verified")
+        boolean emailVerified,
+
+        @JsonProperty("enabled")
+        boolean enabled,
+
+        @JsonProperty("locked")
+        boolean locked,
+
+        @JsonProperty("expired")
+        boolean expired,
+
+        @JsonProperty("created_at")
+        LocalDateTime createdAt,
+
+        @JsonProperty("last_modified_at")
+        LocalDateTime lastModifiedAt
 ) {
 }

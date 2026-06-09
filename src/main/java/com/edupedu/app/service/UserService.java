@@ -3,10 +3,13 @@ package com.edupedu.app.service;
 import com.edupedu.app.exception.ResourceNotFoundException;
 import com.edupedu.app.model.University;
 import com.edupedu.app.model.User;
+import com.edupedu.app.model.enums.Role;
 import com.edupedu.app.repository.UniversityRepository;
 import com.edupedu.app.repository.UserRepository;
 import com.edupedu.app.request.UserCreateRequest;
 import com.edupedu.app.request.UserUpdateRequest;
+import com.edupedu.app.response.StudentResponse;
+import com.edupedu.app.response.TeacherResponse;
 import com.edupedu.app.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +26,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final UniversityRepository universityRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Transactional(readOnly = true)
+    public Object getCurrentUser(User principal) {
+        User user = userRepository.findById(principal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", principal.getId()));
+
+        if (user.getRole() == Role.ROLE_STUDENT && user.getStudent() != null) {
+            return mapToStudentResponse(user);
+        }
+
+        if (user.getRole() == Role.ROLE_TEACHER && user.getTeacher() != null) {
+            return mapToTeacherResponse(user);
+        }
+
+        return mapToResponse(user);
+    }
 
     @Transactional(readOnly = true)
     public List<UserResponse> getAllUsers() {
@@ -137,6 +156,66 @@ public class UserService {
                 user.getLastName(),
                 user.getFullName(),
                 user.getRole(),
+                user.getUniversity() != null ? user.getUniversity().getId() : null,
+                user.isEmailVerified(),
+                user.isEnabled(),
+                user.isLocked(),
+                user.isExpired(),
+                user.getCreatedAt(),
+                user.getLastModifiedAt()
+        );
+    }
+
+    private StudentResponse mapToStudentResponse(User user) {
+        var student = user.getStudent();
+        var studentGroup = student.getStudentGroup();
+
+        return new StudentResponse(
+                student.getId(),
+                user.getId(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getFullName(),
+                student.getStudentNumber(),
+                student.getAccountNumber(),
+                student.getParentPhone(),
+                studentGroup != null ? studentGroup.getId() : null,
+                studentGroup != null ? studentGroup.getName() : null,
+                user.getUniversity() != null ? user.getUniversity().getId() : null,
+                user.isEmailVerified(),
+                user.isEnabled(),
+                user.isLocked(),
+                user.isExpired(),
+                user.getCreatedAt(),
+                user.getLastModifiedAt()
+        );
+    }
+
+    private TeacherResponse mapToTeacherResponse(User user) {
+        var teacher = user.getTeacher();
+        var curator = teacher.getCurator();
+        var curatedGroup = curator != null ? curator.getStudentGroup() : null;
+
+        var subjectIds = teacher.getSubjects() != null
+                ? teacher.getSubjects().stream().map(subject -> subject.getId()).toList()
+                : List.<Long>of();
+        var subjectNames = teacher.getSubjects() != null
+                ? teacher.getSubjects().stream().map(subject -> subject.getName()).toList()
+                : List.<String>of();
+
+        return new TeacherResponse(
+                teacher.getId(),
+                user.getId(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getFullName(),
+                teacher.getEmployeeNumber(),
+                subjectIds,
+                subjectNames,
+                curator != null ? curator.getId() : null,
+                curatedGroup != null ? curatedGroup.getName() : null,
                 user.getUniversity() != null ? user.getUniversity().getId() : null,
                 user.isEmailVerified(),
                 user.isEnabled(),

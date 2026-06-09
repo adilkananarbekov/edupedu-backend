@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edupedu.app.model.StudentGroup;
+import com.edupedu.app.response.StudentGroupResponse;
 import com.edupedu.app.service.StudentGroupService;
 
 import jakarta.validation.Valid;
@@ -27,22 +28,22 @@ public class StudentGroupController {
     private final StudentGroupService studentGroupService;
 
     @GetMapping("/student-groups")
-    public ResponseEntity<List<StudentGroup>> getAllStudentGroups() {
+    public ResponseEntity<List<StudentGroupResponse>> getAllStudentGroups() {
         return new ResponseEntity<>(studentGroupService.getAllStudentGroups(), HttpStatus.OK);
     }
 
     @GetMapping("/student-groups/{id}")
-    public ResponseEntity<StudentGroup> getStudentGroupById(@PathVariable Long id) {
+    public ResponseEntity<StudentGroupResponse> getStudentGroupById(@PathVariable Long id) {
         return new ResponseEntity<>(studentGroupService.getStudentGroupById(id), HttpStatus.OK);
     }
 
     @PostMapping("/admin/student-groups")
-    public ResponseEntity<StudentGroup> createStudentGroup(@RequestBody @Valid StudentGroup studentGroup) {
+    public ResponseEntity<StudentGroupResponse> createStudentGroup(@RequestBody @Valid StudentGroup studentGroup) {
         return new ResponseEntity<>(studentGroupService.createStudentGroup(studentGroup), HttpStatus.CREATED);
     }
 
     @PutMapping("/admin/student-groups/{id}")
-    public ResponseEntity<StudentGroup> updateStudentGroup(@PathVariable Long id,
+    public ResponseEntity<StudentGroupResponse> updateStudentGroup(@PathVariable Long id,
             @RequestBody @Valid StudentGroup studentGroup) {
         return new ResponseEntity<>(studentGroupService.updateStudentGroup(id, studentGroup), HttpStatus.OK);
     }

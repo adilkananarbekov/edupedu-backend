@@ -36,6 +36,7 @@ public class GradeService {
     private final TakenClassRepository takenClassRepository;
     // private final AuditLogService auditLogService;
 
+    @Transactional(readOnly = true)
     public List<GradeDTO> getStudentGrades(Long studentId) {
         return gradeRepository.findByStudentIdOrderByDateDesc(studentId)
                 .stream()
@@ -43,6 +44,7 @@ public class GradeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<GradeDTO> getAllGrades() {
         return gradeRepository.findAll()
                 .stream()
@@ -50,6 +52,7 @@ public class GradeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<GradeDTO> getStudentGradesBySubject(Long studentId, Long subjectId) {
         return gradeRepository.findByStudentIdAndSubjectId(studentId, subjectId)
                 .stream()
@@ -57,6 +60,7 @@ public class GradeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<GradeDTO> getGradesBySubject(Long subjectId) {
         return gradeRepository.findAll()
                 .stream()
@@ -65,6 +69,7 @@ public class GradeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public Map<String, Double> getStudentGradeAverages(Long studentId) {
         List<Grade> grades = gradeRepository.findByStudentId(studentId);
         Map<String, Double> averages = new HashMap<>();
@@ -82,6 +87,7 @@ public class GradeService {
         return averages;
     }
 
+    @Transactional(readOnly = true)
     public Map<String, Double> getGradeAverages() {
         List<Grade> grades = gradeRepository.findAll();
         Map<String, Double> averages = new HashMap<>();
